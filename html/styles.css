@@ -1,0 +1,34 @@
+main {
+    max-width: 1200px;
+    align-items: center;
+    background-color: white;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+
+}
+img {
+    max-width: 50%;
+}
+.productos{
+    display: block;
+    margin: auto;
+}
+.novedades{
+    display: inline-block;
+    background-image: url("./img/novedades.jpg");
+    max-width: auto;
+    
+}
+.cumpleinfantil{
+    display: inline-block;
+    background-image: url("./img/cumple_infantil.jpg");
+    max-width: auto;
+    
+}
+.celebraciones{
+    display: inline-block;
+    background-image: url("./img/otrasfiestas.jpg");
+    max-width: auto;
+    
+}
