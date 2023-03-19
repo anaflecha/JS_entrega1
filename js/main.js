@@ -75,9 +75,10 @@ function ordenarProductos() {
 class ProductoCarrito {
   constructor(prod) {
     this.id = prod.id;
-    this.img = prod.img;
+    this.categoria = prod.categoria;
     this.nombre = prod.nombre;
     this.precio = prod.precio;
+    this.img = prod.img;
     this.cantidad = 1;
   }
 }
@@ -89,10 +90,11 @@ function agregarAlCarrito(productoAgregado) {
     carrito.push(productoEnCarrito);
     Swal.fire(
       'Nuevo producto agregado al carrito',
-      productoAgregado.nombre,
+      productoAgregado.categoria + ": " +productoAgregado.nombre,
       'success'
     );
     $("#tablabody").append(`<tr id='fila${productoEnCarrito.id}' class='tabla-carrito'>
+                            <td> ${productoEnCarrito.categoria}</td>
                             <td> ${productoEnCarrito.nombre}</td>
                             <td id='${productoEnCarrito.id}'> ${productoEnCarrito.cantidad}</td>
                             <td> ${productoEnCarrito.precio}</td>
@@ -111,11 +113,14 @@ function mostrarEnTabla() {
   $("#tablabody").empty();
   for (const prod of carrito) {
     $("#tablabody").append(`<tr id='fila${prod.id}' class='tabla-carrito'>
-                            <td> ${prod.nombre}</td>
-                            <td id='${prod.id}'> ${prod.cantidad}</td>
-                            <td> ${prod.precio}</td>
-                            <td><button class='btn btn-light' id="eliminar${prod.id}">🗑️</button></td>
-                            </tr>`);
+                          <td>${prod.categoria} ": "${prod.nombre} </td>
+                          <td><input type='number' id='cantidad${prod.id}' value='${prod.cantidad}'></td>
+                          <td> ${prod.precio}</td>
+                          <td>
+                            <button class='btn btn-primary actualizar' id="actualizar${prod.id}">✅</button>
+                            <button class='btn btn-light eliminar' id="eliminar${prod.id}">🗑️</button>
+                          </td>
+                        </tr>`);
 
     $(`#eliminar${prod.id}`).click(function () {
       let eliminado = carrito.findIndex(p => p.id == prod.id);
@@ -125,8 +130,17 @@ function mostrarEnTabla() {
       $("#gastoTotal").html(`Total: $ ${calcularTotalCarrito()}`);
       localStorage.setItem("carrito", JSON.stringify(carrito));
     })
+
+    $(`#actualizar${prod.id}`).click(function () {
+      let nuevaCantidad = parseInt($(`#cantidad${prod.id}`).val());
+      carrito.find(p => p.id == prod.id).cantidad = nuevaCantidad;
+      $(`#${prod.id}`).html(nuevaCantidad);
+      $("#gastoTotal").html(`Total: $ ${calcularTotalCarrito()}`);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+    })
   }
 };
+
 function calcularTotalCarrito() {
   let total = 0;
   for (const producto of carrito) {

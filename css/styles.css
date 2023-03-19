@@ -23,6 +23,7 @@
     color: rgb(58, 44, 91);
     background-color: rgb(230, 141, 227);
   }
+ 
   p {
     margin: 0px;
     font-size: 20px;
@@ -89,6 +90,10 @@
   footer .footer-content .footer-info li:first-of-type {
     margin-bottom: 10px;
   }
+  .btn .btn-primary .actualizar{
+    background-color: none;
+  }
+ 
   
   #container-general {
     display: -webkit-box;
@@ -111,7 +116,7 @@
     margin: 20px 0px 30px 80px;
   }
   #container-general #ordenar-modal .modal-carrito {
-    width: 15%;
+    width: 10%;
     -ms-flex-item-align: center;
         -ms-grid-row-align: center;
         align-self: center;
