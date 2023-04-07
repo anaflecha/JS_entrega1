@@ -56,6 +56,9 @@ function obtenerJSON() {
       products = respuesta;
       renderizarProductos();
     }
+  })
+  .fail(function() {
+    console.log("Error al obtener el archivo JSON");
   });
 }
 function ordenarProductos() {
