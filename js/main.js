@@ -1,6 +1,6 @@
 
 let carrito = cargarCarrito();
-let productsJSON = [];
+let products = [];
 let cantidadTotalCompra = carrito.length;
 $(document).ready(function () {
   $("#cantidad-compra").text(cantidadTotalCompra);
@@ -32,7 +32,7 @@ $(document).ready(function () {
   mostrarEnTabla();
 });
 function renderizarProductos() {
-  for (const producto of productsJSON) {
+  for (const producto of products) {
     $("#section-productos").append(`<div class="card-product"> 
                                     <div class="img-container">
                                     <img src="${producto.img}" alt="${producto.nombre}" class="img-product"/>
@@ -53,7 +53,7 @@ function renderizarProductos() {
 function obtenerJSON() {
   $.getJSON("/json/products.json", function (respuesta, estado) {
     if (estado == "success") {
-      productsJSON = respuesta;
+      products = respuesta;
       renderizarProductos();
     }
   });
@@ -61,11 +61,11 @@ function obtenerJSON() {
 function ordenarProductos() {
   let seleccion = $("#seleccion").val();
   if (seleccion == "nombre") {
-    productsJSON.sort(function (a, b) {
+    products.sort(function (a, b) {
       return a.nombre.localeCompare(b.nombre)
     });
   } else if (seleccion == "categoria") {
-    productsJSON.sort(function (a, b) {
+    products.sort(function (a, b) {
       return a.categoria.localeCompare(b.categoria);
     });
   }
