@@ -51,7 +51,7 @@ function renderizarProductos() {
   }
 };
 function obtenerJSON() {
-  $.getJSON("/json/products.json", function (respuesta, estado) {
+  $.getJSON("json/products.json", function (respuesta, estado) {
     if (estado == "success") {
       products = respuesta;
       renderizarProductos();
